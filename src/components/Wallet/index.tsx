@@ -7,7 +7,6 @@ import { useEagerConnect } from '../../hooks/useEagerConnect'
 import { useInactiveListener } from '../../hooks/useInactiveListener'
 import { convertToShortAddress, convertToShortEth } from '../../utils'
 import { injected } from '../../lib/connectors'
-import { useIsAuthorized } from '../../hooks/useIsAuthorized'
 
 interface WalletProps {
   networks: Network[]
@@ -17,7 +16,7 @@ interface WalletProps {
 const Wallet: FunctionComponent<WalletProps> = ({ networks, callback }) => {
   const [balance, setBalance] = useState<string>('? ETH')
   const { active, account, chainId, library, activate } = useWeb3React<providers.Web3Provider>()
-  const isAuthorized = useIsAuthorized(networks)
+  const [isAuthorized, setIsAuthorized] = useState(false)
   // after EagerConnect inactivate Listener
   useInactiveListener(useEagerConnect(networks, callback), networks)
 
@@ -32,7 +31,7 @@ const Wallet: FunctionComponent<WalletProps> = ({ networks, callback }) => {
   }
 
   useEffect(() => {
-    if (account && library)
+    if (account && library) {
       library
         .getBalance(account)
         .then((balance) => setBalance(`${convertToShortEth(balance)} ETH`))
@@ -41,6 +40,12 @@ const Wallet: FunctionComponent<WalletProps> = ({ networks, callback }) => {
           setBalance('?')
           if (callback) callback('UNKNOWN_ERROR', e.message)
         })
+    }
+    injected(networks)
+      .isAuthorized()
+      .then((isAuthorized) => {
+        setIsAuthorized(isAuthorized)
+      })
   }, [account, library, chainId])
 
   return active ? (
