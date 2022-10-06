@@ -19,5 +19,5 @@ yarn add @osaguild/wallet
 ```yarn
 yarn rollup
 yarn login
-yarn publish
+yarn publish --access=public
 ```
