@@ -7,7 +7,7 @@ import { switchNetwork } from '../../lib/metamask'
 
 interface NetworkProps {
   networks: Network[]
-  callback: (eventType: EventType, message: string) => void
+  callback?: (eventType: EventType, message: string) => void
 }
 
 const Network: FunctionComponent<NetworkProps> = ({ networks, callback }) => {

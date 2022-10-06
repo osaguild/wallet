@@ -1,4 +1,4 @@
-const switchNetwork = (chainId: number, callback: (eventType: EventType, message: string) => void) => {
+const switchNetwork = (chainId: number, callback?: (eventType: EventType, message: string) => void) => {
   const { ethereum } = window
   ethereum
     .request({
@@ -6,10 +6,10 @@ const switchNetwork = (chainId: number, callback: (eventType: EventType, message
       params: [{ chainId: `0x${chainId.toString(16)}` }],
     })
     .then(() => {
-      callback('SWITCHED_NETWORK', 'switched network')
+      if (callback) callback('SWITCHED_NETWORK', 'switched network')
     })
     .catch((e: Error) => {
-      callback('SWITCH_NETWORK_ERROR', e.message)
+      if (callback) callback('SWITCH_NETWORK_ERROR', e.message)
     })
 }
 

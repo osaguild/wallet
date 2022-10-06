@@ -11,7 +11,7 @@ import { useIsAuthorized } from '../../hooks/useIsAuthorized'
 
 interface WalletProps {
   networks: Network[]
-  callback: (eventType: EventType, message: string) => void
+  callback?: (eventType: EventType, message: string) => void
 }
 
 const Wallet: FunctionComponent<WalletProps> = ({ networks, callback }) => {
@@ -24,10 +24,10 @@ const Wallet: FunctionComponent<WalletProps> = ({ networks, callback }) => {
   const connect = () => {
     activate(injected(networks), (e) => {
       // connect error
-      callback('CONNECT_ERROR', e.message)
+      if (callback) callback('CONNECT_ERROR', e.message)
     }).then(() => {
       // connected
-      callback('CONNECTED', 'connected')
+      if (callback) callback('CONNECTED', 'connected')
     })
   }
 
@@ -39,7 +39,7 @@ const Wallet: FunctionComponent<WalletProps> = ({ networks, callback }) => {
         .catch((e) => {
           // get balance error.
           setBalance('?')
-          callback('UNKNOWN_ERROR', e.message)
+          if (callback) callback('UNKNOWN_ERROR', e.message)
         })
   }, [account, library, chainId])
 
