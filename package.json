@@ -1,25 +1,27 @@
 {
-  "name": "@osaguild/xxx",
+  "name": "@osaguild/wallet",
   "version": "0.1.0",
-  "description": "xxx",
+  "description": "web3 wallet component",
   "author": {
     "name": "osaguild",
     "email": "osaguild@gmail.com"
   },
   "keywords": [
-    "xxx"
+    "web3",
+    "wallet",
+    "react"
   ],
   "license": "MIT",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/osaguild/xxx.git"
+    "url": "https://github.com/osaguild/wallet.git"
   },
   "bugs": {
-    "url": "https://github.com/osaguild/xxx/issues"
+    "url": "https://github.com/osaguild/wallet/issues"
   },
-  "homepage": "https://github.com/osaguild/xxx",
+  "homepage": "https://github.com/osaguild/wallet",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
