@@ -35,9 +35,17 @@
     "build-sb": "build-storybook"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.11",
+    "@chakra-ui/react": "^2.3.5",
+    "@web3-react/core": "^6.1.9",
+    "@web3-react/injected-connector": "^6.0.7",
+    "ethers": "^5.7.1",
     "react": "^18.2.0"
   },
   "devDependencies": {
+    "@chakra-ui/storybook-addon": "^4.0.12",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
     "@jest/types": "^28.1.3",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-typescript": "^8.3.4",
@@ -66,6 +74,7 @@
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-storybook": "^0.6.4",
+    "framer-motion": "^7.5.2",
     "husky": "^8.0.0",
     "jest": "^28.1.3",
     "jest-environment-jsdom": "^28.1.3",
