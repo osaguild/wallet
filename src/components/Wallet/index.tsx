@@ -59,7 +59,7 @@ const Wallet: FunctionComponent<WalletProps> = ({ networks, callback }) => {
     </>
   ) : (
     <>
-      <Button w={160} onClick={connect} mx={1} my={2}>
+      <Button w={160} onClick={connect} mx={1} my={2} data-testid="wallet-connect">
         connect
       </Button>
     </>
