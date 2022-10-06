@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useWeb3React } from '@web3-react/core'
-import { injected } from '../../lib/connectors'
+import { injected } from '../lib/connectors'
 
 const useEagerConnect = (networks: Network[], callback: (eventType: EventType, message: string) => void) => {
   const { activate, active } = useWeb3React()
@@ -13,7 +13,10 @@ const useEagerConnect = (networks: Network[], callback: (eventType: EventType, m
         if (isAuthorized)
           activate(injected(networks), undefined, true)
             .then(() => callback('CONNECTED', 'connected'))
-            .catch(() => setTried(true))
+            .catch(() => {
+              setTried(true)
+              callback('CONNECT_ERROR', 'connect error')
+            })
         else setTried(true)
       })
   }, [activate])
