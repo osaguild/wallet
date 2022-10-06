@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import { injected } from '../lib/connectors'
+import { Network } from '../types'
 
 const useInactiveListener = (suppress: boolean, networks: Network[]) => {
   const { active, error, activate } = useWeb3React()

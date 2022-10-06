@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react'
 import { providers } from 'ethers'
 import { Web3ReactProvider } from '@web3-react/core'
 import { Wallet } from '../Wallet'
+import { Network } from '../../types'
 
 const Wrapper: FunctionComponent = () => {
   const getLibrary = (provider: providers.ExternalProvider | providers.JsonRpcFetchFunc) => {

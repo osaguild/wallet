@@ -1,3 +1,5 @@
+import { EventType } from '../types'
+
 const switchNetwork = (chainId: number, callback?: (eventType: EventType, message: string) => void) => {
   const { ethereum } = window
   ethereum

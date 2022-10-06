@@ -4,13 +4,14 @@ import { useWeb3React } from '@web3-react/core'
 import { Menu, MenuButton, MenuList, MenuItem, Image, Button, Box, Text } from '@chakra-ui/react'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import { switchNetwork } from '../../lib/metamask'
+import { Network, EventType } from '../../types'
 
-interface NetworkProps {
+interface NetworkButtonProps {
   networks: Network[]
   callback?: (eventType: EventType, message: string) => void
 }
 
-const Network: FunctionComponent<NetworkProps> = ({ networks, callback }) => {
+const NetworkButton: FunctionComponent<NetworkButtonProps> = ({ networks, callback }) => {
   const { chainId } = useWeb3React<providers.Web3Provider>()
   const [currentNetwork, setCurrentNetwork] = useState<Network | undefined>()
 
@@ -45,4 +46,4 @@ const Network: FunctionComponent<NetworkProps> = ({ networks, callback }) => {
   )
 }
 
-export { Network }
+export { NetworkButton }

@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { Wallet } from '../Wallet'
+import { Network } from '../../types'
 
 describe('test', () => {
   beforeEach(() => {
