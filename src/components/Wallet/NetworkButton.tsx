@@ -2,15 +2,16 @@ import { FunctionComponent, useState, useEffect } from 'react'
 import { providers } from 'ethers'
 import { useWeb3React } from '@web3-react/core'
 import { Menu, MenuButton, MenuList, MenuItem, Image, Button, Box, Text } from '@chakra-ui/react'
-import { ChevronDownIcon } from '@chakra-ui/icons'
+import { ChevronDownIcon, WarningTwoIcon } from '@chakra-ui/icons'
 import { switchNetwork } from '../../lib/metamask'
+import { Network, EventType } from '../../types'
 
-interface NetworkProps {
+interface NetworkButtonProps {
   networks: Network[]
   callback?: (eventType: EventType, message: string) => void
 }
 
-const Network: FunctionComponent<NetworkProps> = ({ networks, callback }) => {
+const NetworkButton: FunctionComponent<NetworkButtonProps> = ({ networks, callback }) => {
   const { chainId } = useWeb3React<providers.Web3Provider>()
   const [currentNetwork, setCurrentNetwork] = useState<Network | undefined>()
 
@@ -21,18 +22,20 @@ const Network: FunctionComponent<NetworkProps> = ({ networks, callback }) => {
 
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<ChevronDownIcon />} w={160} mx={1} my={2}>
-        {currentNetwork ? (
+      {currentNetwork ? (
+        <MenuButton as={Button} rightIcon={<ChevronDownIcon />} w={160} mx={1} my={2}>
           <Box>
             <Image boxSize="1.5rem" borderRadius="full" src={currentNetwork.icon} alt="chain logo" />
             <Text textAlign="left" mt={-5} ml={9}>
               {currentNetwork.name}
             </Text>
           </Box>
-        ) : (
-          <Box>network</Box>
-        )}
-      </MenuButton>
+        </MenuButton>
+      ) : (
+        <MenuButton as={Button} leftIcon={<WarningTwoIcon />} rightIcon={<ChevronDownIcon />} w={160} mx={1} my={2}>
+          <Box>Network</Box>
+        </MenuButton>
+      )}
       <MenuList w={10}>
         {networks.map((network) => (
           <MenuItem key={network.chainId} onClick={() => switchNetwork(network.chainId, callback)}>
@@ -45,4 +48,4 @@ const Network: FunctionComponent<NetworkProps> = ({ networks, callback }) => {
   )
 }
 
-export { Network }
+export { NetworkButton }

@@ -2,11 +2,12 @@ import { FunctionComponent, useState, useEffect } from 'react'
 import { providers } from 'ethers'
 import { useWeb3React } from '@web3-react/core'
 import { Button } from '@chakra-ui/react'
-import { Network } from './Network'
+import { NetworkButton } from './NetworkButton'
 import { useEagerConnect } from '../../hooks/useEagerConnect'
 import { useInactiveListener } from '../../hooks/useInactiveListener'
-import { convertToShortAddress, convertToShortEth } from '../../utils'
+import { convertToShortAddress, convertToShortEth } from '../../lib/converter'
 import { injected } from '../../lib/connectors'
+import { Network, EventType } from '../../types'
 
 interface WalletProps {
   networks: Network[]
@@ -27,6 +28,7 @@ const Wallet: FunctionComponent<WalletProps> = ({ networks, callback }) => {
     }).then(() => {
       // connected
       if (callback) callback('CONNECTED', 'connected')
+      setIsAuthorized(true)
     })
   }
 
@@ -50,7 +52,7 @@ const Wallet: FunctionComponent<WalletProps> = ({ networks, callback }) => {
 
   return active ? (
     <>
-      <Network networks={networks} callback={callback} />
+      <NetworkButton networks={networks} callback={callback} />
       <Button w={160} mx={1} my={2}>
         {balance}
       </Button>
@@ -60,7 +62,7 @@ const Wallet: FunctionComponent<WalletProps> = ({ networks, callback }) => {
     </>
   ) : !active && isAuthorized ? (
     <>
-      <Network networks={networks} callback={callback} />
+      <NetworkButton networks={networks} callback={callback} />
     </>
   ) : (
     <>

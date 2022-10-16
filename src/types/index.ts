@@ -1,7 +1,3 @@
-interface Window {
-  ethereum: any
-}
-
 type Network = {
   chainId: number
   name: string
@@ -9,3 +5,5 @@ type Network = {
 }
 
 type EventType = 'CONNECTED' | 'CONNECT_ERROR' | 'UNKNOWN_ERROR' | 'SWITCHED_NETWORK' | 'SWITCH_NETWORK_ERROR'
+
+export type { Network, EventType }
