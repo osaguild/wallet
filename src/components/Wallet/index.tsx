@@ -28,6 +28,7 @@ const Wallet: FunctionComponent<WalletProps> = ({ networks, callback }) => {
     }).then(() => {
       // connected
       if (callback) callback('CONNECTED', 'connected')
+      setIsAuthorized(true)
     })
   }
 

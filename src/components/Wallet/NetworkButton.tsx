@@ -2,7 +2,7 @@ import { FunctionComponent, useState, useEffect } from 'react'
 import { providers } from 'ethers'
 import { useWeb3React } from '@web3-react/core'
 import { Menu, MenuButton, MenuList, MenuItem, Image, Button, Box, Text } from '@chakra-ui/react'
-import { ChevronDownIcon } from '@chakra-ui/icons'
+import { ChevronDownIcon, WarningTwoIcon } from '@chakra-ui/icons'
 import { switchNetwork } from '../../lib/metamask'
 import { Network, EventType } from '../../types'
 
@@ -22,18 +22,20 @@ const NetworkButton: FunctionComponent<NetworkButtonProps> = ({ networks, callba
 
   return (
     <Menu>
-      <MenuButton as={Button} rightIcon={<ChevronDownIcon />} w={160} mx={1} my={2}>
-        {currentNetwork ? (
+      {currentNetwork ? (
+        <MenuButton as={Button} rightIcon={<ChevronDownIcon />} w={160} mx={1} my={2}>
           <Box>
             <Image boxSize="1.5rem" borderRadius="full" src={currentNetwork.icon} alt="chain logo" />
             <Text textAlign="left" mt={-5} ml={9}>
               {currentNetwork.name}
             </Text>
           </Box>
-        ) : (
-          <Box>network</Box>
-        )}
-      </MenuButton>
+        </MenuButton>
+      ) : (
+        <MenuButton as={Button} leftIcon={<WarningTwoIcon />} rightIcon={<ChevronDownIcon />} w={160} mx={1} my={2}>
+          <Box>Network</Box>
+        </MenuButton>
+      )}
       <MenuList w={10}>
         {networks.map((network) => (
           <MenuItem key={network.chainId} onClick={() => switchNetwork(network.chainId, callback)}>
