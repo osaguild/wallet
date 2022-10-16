@@ -1,7 +1,7 @@
 import { FunctionComponent, useState, useEffect } from 'react'
 import { providers } from 'ethers'
 import { useWeb3React } from '@web3-react/core'
-import { Menu, MenuButton, MenuList, MenuItem, Image, Button, Box, Text } from '@chakra-ui/react'
+import { Menu, MenuButton, MenuList, MenuItem, Image, Button, Box, Text, Tooltip } from '@chakra-ui/react'
 import { ChevronDownIcon, WarningTwoIcon } from '@chakra-ui/icons'
 import { switchNetwork } from '../../lib/metamask'
 import { Network, EventType } from '../../types'
@@ -32,9 +32,11 @@ const NetworkButton: FunctionComponent<NetworkButtonProps> = ({ networks, callba
           </Box>
         </MenuButton>
       ) : (
-        <MenuButton as={Button} leftIcon={<WarningTwoIcon />} rightIcon={<ChevronDownIcon />} w={160} mx={1} my={2}>
-          <Box>Network</Box>
-        </MenuButton>
+        <Tooltip label="selected network is not supported">
+          <MenuButton as={Button} leftIcon={<WarningTwoIcon />} rightIcon={<ChevronDownIcon />} w={160} mx={1} my={2}>
+            <Box>Network</Box>
+          </MenuButton>
+        </Tooltip>
       )}
       <MenuList w={10}>
         {networks.map((network) => (
